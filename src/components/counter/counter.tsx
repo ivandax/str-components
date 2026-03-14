@@ -9,6 +9,7 @@ export function Counter() {
   };
 
   const decreaseCount = () => {
+    if(count <= 0) return;
     setCount((c) => c - 1);
   };
 
