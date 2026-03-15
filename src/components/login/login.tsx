@@ -6,6 +6,8 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<null | string>(null);
 
+  // Note: in React arrow functions are the standard in case we need
+  // to access vars from outside the scope
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage(null);
@@ -27,6 +29,7 @@ export function Login() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          aria-label="email-input"
         />
       </label>
       <label>
@@ -37,6 +40,7 @@ export function Login() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          aria-label="password-input"
         />
       </label>
       <button>Login</button>
