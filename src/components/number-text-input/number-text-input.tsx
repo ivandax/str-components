@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./number-text-input.css";
 
 export function NumberTextInput() {
   // keeping state inside for this test
@@ -13,5 +14,7 @@ export function NumberTextInput() {
     setText(onlyNumbers);
   };
 
-  return <input value={text} onChange={handleChange} />;
+  return (
+    <input className="numberTextInput" value={text} onChange={handleChange} />
+  );
 }
