@@ -4,16 +4,16 @@ import "./login.css";
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<null | string>(null);
+  const [message, setMessage] = useState<null | string>(null);
 
-  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
-    setError(null);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setMessage(null);
     if (email.trim() === "" || password.trim() === "") {
-      setError("Incomplete fields");
+      setMessage("Incomplete fields");
       return;
     }
-    console.log("Will attempt to login!");
+    setMessage("Success!");
   };
 
   return (
@@ -40,7 +40,7 @@ export function Login() {
         />
       </label>
       <button>Login</button>
-      {error && <span>{error}</span>}
+      {message && <span>{message}</span>}
     </form>
   );
 }
