@@ -1,6 +1,8 @@
-.app {
-  margin: 12px;
+.loginForm {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background-color: aqua;
   align-items: flex-start;
 }
