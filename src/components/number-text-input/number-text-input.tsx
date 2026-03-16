@@ -10,20 +10,27 @@ export function NumberTextInput() {
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
-    console.log(e.target.value);
     const onlyNumbers = e.target.value.replace(/\D/g, "");
-    console.log(onlyNumbers);
+    setText(onlyNumbers.slice(0, 16));
+  };
+
+  const format = (numbers: string) => {
     const final: string[] = [];
-    for (let i = 0; i < onlyNumbers.length; i++) {
-      final.push(onlyNumbers[i]);
-      if ((i + 1) % 4 === 0) {
+    const chars = numbers.split("");
+    for (let i = 0; i < chars.length; i++) {
+      final.push(chars[i]);
+      if ((i + 1) % 4 === 0 && i !== chars.length - 1) {
         final.push(" ");
       }
     }
-    setText(final.join(""));
+    return final.join("");
   };
 
   return (
-    <input className="numberTextInput" value={text} onChange={handleChange} />
+    <input
+      className="numberTextInput"
+      value={format(text)}
+      onChange={handleChange}
+    />
   );
 }
