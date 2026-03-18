@@ -1,11 +1,10 @@
 import "./App.css";
-import { MonthInput } from "./components/month-input";
+import { MyComponent } from "./components/my-component";
 
 function App() {
   return (
     <div className="app">
-      <span>Hello world</span>
-      <MonthInput />
+      <MyComponent />
     </div>
   );
 }
