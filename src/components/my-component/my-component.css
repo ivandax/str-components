@@ -4,3 +4,9 @@
   padding: 8px;
   border-radius: 8px;
 }
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
