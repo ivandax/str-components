@@ -12,28 +12,27 @@ export type OnboardingForm = {
   fields: OnboardingFormField[];
 };
 
-// send data as props to the component
-
+const buildFormData = (
+  fields: OnboardingFormField[],
+): Record<string, string> => {
+  return fields.reduce((acc, field) => {
+    return {
+      ...acc,
+      [field.name]: "",
+    };
+  }, {});
+};
 interface MyComponentProps {
   formData: OnboardingForm;
 }
 
 export function MyComponent({ formData }: MyComponentProps) {
   const { formTitle, fields } = formData;
-  // iterate over the array and create the form
-
-  const buildFormData = (): Record<string, string> => {
-    return fields.reduce((acc, field) => {
-      return {
-        ...acc,
-        [field.name]: "",
-      };
-    }, {});
-  };
 
   // state management
-  const [formState, setFormState] =
-    useState<Record<string, string>>(buildFormData());
+  const [formState, setFormState] = useState<Record<string, string>>(
+    buildFormData(fields),
+  );
 
   const [error, setError] = useState<null | string>(null);
 
@@ -50,7 +49,17 @@ export function MyComponent({ formData }: MyComponentProps) {
       }
       if (format === "url") {
         const value = formState[key];
-        if (value === "" || !value.startsWith("http/https")) {
+        if (
+          value === "" ||
+          !value.startsWith("http") ||
+          !value.startsWith("https")
+        ) {
+          failsValidation = true;
+        }
+      }
+      if (format === "string") {
+        const value = formState[key];
+        if (!["US", "Canada"].includes(value)) {
           failsValidation = true;
         }
       }
@@ -73,7 +82,7 @@ export function MyComponent({ formData }: MyComponentProps) {
           if (failsValidation) {
             setError("Missing field");
           }
-          // do validation
+          console.log("passes validations!");
         }}
       >
         <h1>{formTitle}</h1>
